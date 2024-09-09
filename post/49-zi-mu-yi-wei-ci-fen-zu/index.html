@@ -1,0 +1,229 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>49. 字母异位词分组 | lelter&#39;s blog</title>
+<link rel="shortcut icon" href="https://lelter.github.io/favicon.ico?v=1725865884414">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://lelter.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="49. 字母异位词分组 | lelter&#39;s blog - Atom Feed" href="https://lelter.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="49. 字母异位词分组
+给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。
+字母异位词 是由重新排列源单词的所有字母得到的一个新单词。
+示例 1:
+输入: strs = [&quot;eat&quot;, &q..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lelter.github.io">
+  <img class="avatar" src="https://lelter.github.io/images/avatar.png?v=1725865884414" alt="">
+  </a>
+  <h1 class="site-title">
+    lelter&#39;s blog
+  </h1>
+  <p class="site-description">
+    
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              49. 字母异位词分组
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-09-02
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p><strong>49. 字母异位词分组</strong></p>
+<p>给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。</p>
+<p>字母异位词 是由重新排列源单词的所有字母得到的一个新单词。<br>
+示例 1:</p>
+<p>输入: strs = [&quot;eat&quot;, &quot;tea&quot;, &quot;tan&quot;, &quot;ate&quot;, &quot;nat&quot;, &quot;bat&quot;]<br>
+输出: [[&quot;bat&quot;],[&quot;nat&quot;,&quot;tan&quot;],[&quot;ate&quot;,&quot;eat&quot;,&quot;tea&quot;]]<br>
+示例 2:</p>
+<p>输入: strs = [&quot;&quot;]<br>
+输出: [[&quot;&quot;]]<br>
+示例 3:</p>
+<p>输入: strs = [&quot;a&quot;]<br>
+输出: [[&quot;a&quot;]]</p>
+<hr>
+<h2>解法
+<p>穷举法，时间复杂度为O(n^2)，超时了.</p>
+<pre><code>class Solution:
+    def wordIn(self, word1, word2):
+        alphabel1=[0 for i in range(26)]
+        alphabel2=[0 for i in range(26)]
+
+        for i in word1:
+            alphabel1[ord(i)-ord('a')]+=1
+        for i in word2:
+            alphabel2[ord(i)-ord('a')]+=1
+        if alphabel1==alphabel2:
+            return True
+        else:
+            return False
+   
+
+    def groupAnagrams(self, strs: List[str]) -&gt; List[List[str]]:
+        visited = [0 for i in range(len(strs))]
+        result = [[] for i in range(len(strs))]
+        for i in range(len(strs)):
+            if visited[i]:
+                continue
+            else:
+                result[i].append(strs[i])
+            for j in range(i + 1, len(strs)):
+                visited[i] = 1
+
+                if not visited[j]:
+                    if self.wordIn(strs[i], strs[j]):
+                        visited[j] = 1
+                        result[i].append(strs[j])
+
+                else:
+                    continue
+        result = [x for x in result if x != []]
+        return result
+</code></pre>
+<p>python提供哈希表，也就是字典。<br>
+collections.defaultdict(list)<br>
+利用哈希表，key是一样的，因此就只需要添加值即可。</p>
+<pre><code>    def groupAnagrams(self, strs: List[str]) -&gt; List[List[str]]:
+        mp=collections.defaultdict(list)
+        for st in strs:
+            key=&quot;&quot;.join(sorted(st))
+            mp[key].append(st)
+        return list(mp.values())
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lelter.github.io/post/lora/">
+              <h3 class="post-title">
+                Lora
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  
+  <a class="rss" href="https://lelter.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lora | lelter&#39;s blog</title>
+<link rel="shortcut icon" href="https://lelter.github.io/favicon.ico?v=1725865884414">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://lelter.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Lora | lelter&#39;s blog - Atom Feed" href="https://lelter.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="PEFT中用Lora进行微调。
+
+为什么Lora中训练时间和显存没有明显降低？
+仍需要计算主要模型的梯度，来优化Lora的参数。
+
+因此，反向传播的时候，对B和A求梯度得到的公式需要对W进行求梯度，也就是整个模型的梯度。
+但由于不用求和存取..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lelter.github.io">
+  <img class="avatar" src="https://lelter.github.io/images/avatar.png?v=1725865884414" alt="">
+  </a>
+  <h1 class="site-title">
+    lelter&#39;s blog
+  </h1>
+  <p class="site-description">
+    
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Lora
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-09-01
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="peft中用lora进行微调">PEFT中用Lora进行微调。</h2>
+<figure data-type="image" tabindex="1"><img src="https://lelter.github.io/post-images/1725194054787.png" alt="" loading="lazy"></figure>
+<h2 id="为什么lora中训练时间和显存没有明显降低">为什么Lora中训练时间和显存没有明显降低？</h2>
+<p>仍需要计算主要模型的梯度，来优化Lora的参数。<br>
+<img src="https://lelter.github.io/post-images/1725277440630.png" alt="" loading="lazy"><br>
+因此，反向传播的时候，对B和A求梯度得到的公式需要对W进行求梯度，也就是整个模型的梯度。<img src="https://lelter.github.io/post-images/1725277498041.png" alt="" loading="lazy"><br>
+但由于不用求和存取优化器的参数（像Adam优化器需要维护每个参数的一阶动量和二阶动量，分别是梯度的指数移动平均值和梯度平方的指数移动平均值），因此LoRA在显存方面就只是节省了主干模型的优化器状态。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#peft%E4%B8%AD%E7%94%A8lora%E8%BF%9B%E8%A1%8C%E5%BE%AE%E8%B0%83">PEFT中用Lora进行微调。</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88lora%E4%B8%AD%E8%AE%AD%E7%BB%83%E6%97%B6%E9%97%B4%E5%92%8C%E6%98%BE%E5%AD%98%E6%B2%A1%E6%9C%89%E6%98%8E%E6%98%BE%E9%99%8D%E4%BD%8E">为什么Lora中训练时间和显存没有明显降低？</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lelter.github.io/post/pytorch-zhong-jiao-cha-shang-de-wen-ti/">
+              <h3 class="post-title">
+                pytorch中交叉熵的问题
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  
+  <a class="rss" href="https://lelter.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

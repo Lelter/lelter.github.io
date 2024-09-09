@@ -1,0 +1,194 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>信息熵和对比学习，为什么二分类任务中交叉熵和对比学习损失可以交换？ | lelter&#39;s blog</title>
+<link rel="shortcut icon" href="https://lelter.github.io/favicon.ico?v=1725865884414">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://lelter.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="信息熵和对比学习，为什么二分类任务中交叉熵和对比学习损失可以交换？ | lelter&#39;s blog - Atom Feed" href="https://lelter.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一个概率分布P的信息熵含量如下：
+P(x)log(P(x))
+KL散度基于信息熵，描述两个概率分布的差异：
+
+交叉熵和KL散度关系密切：
+
+也就是KL散度为P、Q的交叉熵减去P的信息熵。
+而KL散度中P的信息熵固定，因此，优化KL散度和优化..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lelter.github.io">
+  <img class="avatar" src="https://lelter.github.io/images/avatar.png?v=1725865884414" alt="">
+  </a>
+  <h1 class="site-title">
+    lelter&#39;s blog
+  </h1>
+  <p class="site-description">
+    
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              信息熵和对比学习，为什么二分类任务中交叉熵和对比学习损失可以交换？
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-09-09
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>一个概率分布P的信息熵含量如下：</p>
+<p>P(x)log(P(x))</p>
+<p>KL散度基于信息熵，描述两个概率分布的差异：</p>
+<figure data-type="image" tabindex="1"><img src="https://lelter.github.io/post-images/1725865006223.png" alt="" loading="lazy"></figure>
+<p>交叉熵和KL散度关系密切：</p>
+<figure data-type="image" tabindex="2"><img src="https://lelter.github.io/post-images/1725865060984.png" alt="" loading="lazy"></figure>
+<p>也就是KL散度为P、Q的交叉熵减去P的信息熵。</p>
+<p>而KL散度中P的信息熵固定，因此，优化KL散度和优化交叉熵是一样的，就是少一项。</p>
+<h2 id="对比损失和交叉熵为什么可以交换">对比损失和交叉熵为什么可以交换</h2>
+<p>交叉熵损失函数如下：</p>
+<figure data-type="image" tabindex="3"><img src="https://lelter.github.io/post-images/1725865768853.png" alt="" loading="lazy"></figure>
+<p>进行了softmax之后，公式为：</p>
+<figure data-type="image" tabindex="4"><img src="https://lelter.github.io/post-images/1725865805828.png" alt="" loading="lazy"></figure>
+<p>而infoNCE的损失函数为：</p>
+<figure data-type="image" tabindex="5"><img src="https://lelter.github.io/post-images/1725865832245.png" alt="" loading="lazy"></figure>
+<p>那么，可以将正样本看作标签为1的值，负样本为其他类别，进行交叉熵损失优化，效果一样。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%AF%B9%E6%AF%94%E6%8D%9F%E5%A4%B1%E5%92%8C%E4%BA%A4%E5%8F%89%E7%86%B5%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E4%BA%A4%E6%8D%A2">对比损失和交叉熵为什么可以交换</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lelter.github.io/post/142-huan-xing-lian-biao-ii/">
+              <h3 class="post-title">
+                142. 环形链表 II
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  
+  <a class="rss" href="https://lelter.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
